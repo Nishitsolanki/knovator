@@ -85,3 +85,12 @@ exports.getPostsByLocation = async (req, res) => {
 };
 
 
+exports.postCount = async (req, res) => {
+  try {
+    const activePostsCount = await Post.countDocuments({ active: 1 });
+    const inactivePostsCount = await Post.countDocuments({ active: 0 });  
+    return res.status(200).json({ activePostsCount, inactivePostsCount });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

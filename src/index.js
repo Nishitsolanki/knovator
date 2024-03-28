@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 var passport = require('passport')
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
-const { getDashboard } = require('./controller/dashboardController');
 
 const app = express();
 
@@ -18,8 +17,6 @@ app.use(passport.initialize());
 
 app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
-
-app.get('/dashboard', passport.authenticate('jwt', { session: false }), getDashboard);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
